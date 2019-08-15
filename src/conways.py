@@ -6,6 +6,14 @@ WHITE = (255, 255, 255)
 GRAY = (25, 25, 25)
 WIN_SIZE = 500
 
+cur_states = [0] * 400
+cur_states[10] = 1
+cur_states[30] = 1
+cur_states[70] = 1
+cur_states[90] = 1
+next_states = []
+
+
 pygame.init()
  
 # Set the width and height of the screen [width, height]
@@ -37,10 +45,17 @@ while not done:
     # Here, we clear the screen to gray. Don't put other drawing commands
     # above this, or they will be erased with this command.
     screen.fill(GRAY)
- 
+    color = BLACK
+    square_index = 0
     # --- Drawing code should go here
-   
-
+    for i in range(20):
+        for j in range(20):
+            if cur_states[square_index] == 1:
+                color = WHITE
+            else:
+                color = BLACK
+            pygame.draw.rect(screen, color, pygame.Rect(j*20 + 5*j, i*20 + 5*i, 20, 20))
+            square_index += 1
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
